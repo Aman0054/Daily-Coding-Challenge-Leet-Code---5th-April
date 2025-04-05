@@ -1,0 +1,18 @@
+1863. Sum of all Subsets XOR totals
+
+class Solution {
+    public int subsetXORSum(int[] nums) {
+        return dfs(nums, 0, 0);
+    }
+
+    private int dfs(int[] nums, int index, int currentXOR) {
+        if (index == nums.length) {
+            return currentXOR;
+        }
+        // Include current element
+        int with = dfs(nums, index + 1, currentXOR ^ nums[index]);
+        // Exclude current element
+        int without = dfs(nums, index + 1, currentXOR);
+        return with + without;
+    }
+}
